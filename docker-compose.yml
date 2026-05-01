@@ -1,0 +1,55 @@
+# =============================================================================
+# docker-compose.yml — orchestrates both subprojects of the LaunchDarkly SE
+# Technical Exercise.
+# =============================================================================
+# Usage:
+#   1. Copy .env.example to .env in the repo root and fill in the three values.
+#   2. docker compose up --build
+#
+# After startup:
+#   - Web app  (Parts 1, 2, EC1):  http://localhost:5173
+#   - AI demo  (Extra Credit 2):   http://localhost:3001
+#
+# The two services do not talk to each other — they're independent demos that
+# share a repo for convenience. No internal network is needed.
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Web app: Parts 1, 2, and Extra Credit 1.
+  # React/Vite app, built into static assets and served by nginx.
+  # ---------------------------------------------------------------------------
+  web:
+    build:
+      context: ./launchdarkly-se-exercise
+      # Vite bakes VITE_LD_CLIENT_SIDE_ID into the bundle at BUILD time, not
+      # runtime. It must be passed as a build-arg. If you change the value
+      # in .env, run `docker compose up --build` to rebuild — a plain
+      # `up` will reuse the cached image and the old value will persist.
+      args:
+        VITE_LD_CLIENT_SIDE_ID: ${VITE_LD_CLIENT_SIDE_ID:-}
+    image: launchdarkly-se-exercise-web
+    container_name: ldse-web
+    ports:
+      # Host:Container — keep the host port matching the README's instructions.
+      - "5173:80"
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # AI Configs demo: Extra Credit 2.
+  # Node.js + Express server using the LD AI SDK and Anthropic Claude.
+  # ---------------------------------------------------------------------------
+  ai:
+    build:
+      context: ./launchdarkly-ai
+    image: launchdarkly-ai-server
+    container_name: ldse-ai
+    ports:
+      - "3001:3001"
+    environment:
+      # These are read at server runtime; changing them in .env and running
+      # `docker compose up` (no rebuild) is sufficient for them to take effect.
+      LD_SDK_KEY: ${LD_SDK_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      PORT: "3001"
+    restart: unless-stopped

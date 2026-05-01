@@ -1,0 +1,21 @@
+{
+  "name": "extra-credit-2-ai-configs",
+  "private": true,
+  "version": "1.0.0",
+  "description": "LaunchDarkly SE Technical Exercise — Extra Credit 2: AI Configs with Anthropic Claude",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.1",
+    "@launchdarkly/node-server-sdk": "^9.10.12",
+    "@launchdarkly/server-sdk-ai": "^0.18.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2"
+  }
+}

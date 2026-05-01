@@ -1,0 +1,22 @@
+# =============================================================================
+# Top-level .gitignore. The two subprojects keep their own .gitignore files
+# scoped to their own concerns; this one covers the repo root and shared cases.
+# =============================================================================
+
+# Local docker-compose env file. Never commit secrets.
+.env
+.env.local
+.env.*.local
+
+# Editor / OS noise
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Dependency dirs (also covered by per-subproject .gitignore files; belt-and-suspenders)
+node_modules/
+
+# Build output
+dist/
+dist-ssr/

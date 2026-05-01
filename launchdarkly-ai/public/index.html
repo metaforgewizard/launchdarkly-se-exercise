@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABC Company Support Chatbot — LaunchDarkly AI Configs Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="topbar__logo">⚡</span>
+        <div>
+          <div class="topbar__title">ABC Company Support</div>
+          <div class="topbar__subtitle">
+            Powered by LaunchDarkly AI Configs · Extra Credit 2
+          </div>
+        </div>
+      </div>
+      <a class="topbar__link" href="https://app.launchdarkly.com" target="_blank" rel="noopener">
+        Open LaunchDarkly →
+      </a>
+    </header>
+
+    <main class="layout">
+      <!-- Left column: persona switcher + resolved variation panel -->
+      <aside class="sidebar">
+        <section class="card">
+          <div class="card__label">Sign in as</div>
+          <select id="persona-select" class="select" aria-label="Select persona"></select>
+          <div id="persona-description" class="card__hint"></div>
+        </section>
+
+        <section class="card">
+          <div class="card__label">LaunchDarkly served</div>
+          <div class="resolved">
+            <div class="resolved__row">
+              <span class="resolved__key">Variation</span>
+              <span id="resolved-variation" class="resolved__value">—</span>
+            </div>
+            <div class="resolved__row">
+              <span class="resolved__key">Model</span>
+              <span id="resolved-model" class="resolved__value">—</span>
+            </div>
+            <div class="resolved__row">
+              <span class="resolved__key">Last response tokens</span>
+              <span id="resolved-tokens" class="resolved__value">—</span>
+            </div>
+          </div>
+          <div class="card__hint">
+            This panel updates after each message based on what LaunchDarkly evaluated for the
+            current persona. Change the variation in the LaunchDarkly UI and the next message will
+            reflect it — no restart required.
+          </div>
+        </section>
+
+        <section class="card card--instructions">
+          <div class="card__label">Try it</div>
+          <ol class="instructions">
+            <li>Send a message as <strong>Maria (free tier)</strong>. The reply will be casual and warm.</li>
+            <li>Switch to <strong>David (premium)</strong> and send the same message. The reply gets terse and expert-coded.</li>
+            <li>Switch to <strong>Priya (individually targeted)</strong>. Even though Priya's tier is "free", the individual target wins.</li>
+            <li>Edit the system prompt of either variation in the LaunchDarkly UI, then send another message — no restart.</li>
+          </ol>
+        </section>
+      </aside>
+
+      <!-- Right column: chat window -->
+      <section class="chat">
+        <div id="chat-log" class="chat__log" aria-live="polite"></div>
+
+        <form id="chat-form" class="chat__form" autocomplete="off">
+          <textarea
+            id="chat-input"
+            class="chat__input"
+            rows="2"
+            placeholder="Ask the support bot a question…"
+            required
+          ></textarea>
+          <button type="submit" id="chat-submit" class="chat__submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/chat.js"></script>
+  </body>
+</html>
