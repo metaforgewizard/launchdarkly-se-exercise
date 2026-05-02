@@ -119,7 +119,7 @@ The app opens at <http://localhost:5173>. You should see the LaunchDarkly-styled
 
 1. Open `/exercise-1`. The flag `new-checkout` is OFF, so the **old checkout** appears.
 2. In the LaunchDarkly UI, toggle `new-checkout` to **ON**. Within a second, the page swaps to the **new checkout** — no reload. The bottom demo bar's flag pill changes from OFF to ON.
-3. With the flag ON, the demo bar shows a **Simulate issue** button. Click it. A yellow remediation explainer appears in the page body explaining what would happen in production: an observability tool detects the error, fires a webhook, and the flag flips. The demo includes a `curl` snippet showing the LaunchDarkly REST API call that does the actual work.
+3. With the flag ON, the demo bar shows a **Simulate issue** button. Click it. A yellow remediation explainer appears in the page body explaining what would happen in production: an observability tool detects the error, fires a webhook, and the flag flips. The demo includes a `curl` snippet showing the LaunchDarkly REST API call that does the actual work.  One thing to note here: depending on your screen resolution you may need to scroll down on the checkout screen to see the remediation explainer.
 4. To "remediate," toggle the flag back to **OFF** in the LaunchDarkly UI. The page reverts to the old checkout instantly. The remediation explainer disappears.
 
 **What this exercise demonstrates:**
